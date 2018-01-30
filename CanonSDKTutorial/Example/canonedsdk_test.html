@@ -1,0 +1,147 @@
+<object id="x" classid="clsid:8d7d8518-ca58-4863-b94d-3c616fda7b35"></object>
+<hr />
+<input type="button" value="关闭会话" onclick="fnTest()" /><br />
+<input type="button" value="点击照相" onclick="takePhoto()" /><br />
+<input type="button" value="打开会话" onclick="openSession()" /><br />
+
+<label>容差值：</label><input type="text" id="rc" value="1800000" /><br />
+<label>保存路径：</label><input type="text" id="save" name="savePath" value="C:\TEMP" /><br />
+<label>照片名称：</label><input type="text" id="picName" name="picName" value="abc.jpg" /><br />
+
+<input type="button" value="打开实时预览" onclick="openLiveView()" /><br />
+<input type="button" value="显示图片" onclick="getImageBase()" /><br />
+<img id="tx" width="358px" height="441px" src="data:image/jpeg;base64,"/>
+<!--<script type="text/javascript" src="jquery-2.2.2.js"></script>-->
+<script type="text/javascript">
+
+    //$.ready(function () {
+    //    var x = $("x");
+    //});
+
+    function $(oid) {
+        return document.getElementById(oid);
+    }
+
+    var takePhoto = function () {
+        var x = $("x");
+        var savePath = $("save").value;
+        var picName = $("picName").value;
+
+        // alert(x.OpenSession());
+        //var result = typeof (x.LiveViewPause());
+        //alert("您确定要开始拍照了吗");
+        //sleep(5000);
+        //        if (result) {
+        //            solubilityThreshold();
+        //            x.TakePhotoButton(savePath, picName);
+        //        }
+
+        x.TakePhotoButton(savePath, picName);
+        //三秒后去显示图片
+        setTimeout("getImageBase()", 1000);
+    }
+
+    function sleep(n) {
+        var start = new Date().getTime();
+        while (true) if (new Date().getTime() - start > n) break;
+    }
+
+    var solubilityThreshold=function(){
+        var x = $("x");
+        var rc=$("rc").value;
+        x.SolubilityThreshold(rc);
+    }
+
+    var pauseLiveView = function () {
+        var x = $("x");
+        return x.LiveViewPause();
+    }
+
+    var openLiveView = function () {
+        var x = $("x");
+       // x.OpenSession();
+        x.LiveViewButton();
+    }
+
+    var openSession = function () {
+        var x = $("x");
+        x.OpenSession();
+    }
+
+    var getImageBase = function () {
+        var x = $("x");
+        var a = x.getImageBase();
+        var txi = "data:image/jpeg;base64," + a;
+        var t = $("tx");
+        t.src = txi;
+    }
+
+    var fnTest = function () {
+//        var x = $("x");
+//        x.Start("这是js中的参数");
+//        alert("GetString测试:" + x.GetString());
+//        alert("GetDateTime" + x.GetDateTime());
+//        //var s = x.GetStringArray();
+//        //alert(s);
+//        alert("GetStringArray测试：" + x.GetStringArray());
+//        alert("GetInt测试:" + x.GetInt());
+//        alert("GetDouble测试:" + x.GetDouble());
+//        //var g = x.GetGuid();
+//        //alert(g);
+//        alert("GetGuid测试:" + x.GetGuid());
+//        alert("GetList测试:" + x.GetList());
+//        alert("GetListItems测试：" + x.GetListItems());
+//        var s = x.GetListItems();
+//        var d = eval(s);
+//        alert(s);
+//        alert(d[0].item);
+//        //var items = eval("(" + x.GetListItems() + ")");
+//        //alert(items);
+        var x = $("x");
+        //        alert(x.CloseSession());
+        x.OpenSession();
+        x.LiveViewButton();
+    }
+
+
+
+//    //关闭窗口前
+//    window.onbeforeunload = function () {
+//        var x = $("x");
+//        alert(x.dispose());
+//    }
+
+//    //关闭窗口时释放资源
+//    window.onunload = function () {
+//        var x = $("x");
+//        alert(x.dispose());
+//        }
+
+
+    window.onbeforeunload = onbeforeunload_handler;
+    window.onunload = onunload_handler;
+
+    function onbeforeunload_handler() {
+        var x = $("x");
+        x.dispose();
+    }
+
+    function onunload_handler() {
+        var x = $("x");
+        x.dispose();
+    }  
+
+
+//    window.onbeforeunload = onbeforeunload_handler;
+//    window.onunload = onunload_handler;
+//    function onbeforeunload_handler() {
+//        var warning = "确认退出?";
+//        return warning;
+//    }
+
+//    function onunload_handler() {
+//        var warning = "谢谢光临";
+//        alert(warning);
+//    }
+
+</script>

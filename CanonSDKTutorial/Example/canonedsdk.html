@@ -1,0 +1,92 @@
+<object id="x" classid="clsid:8d7d8518-ca58-4863-b94d-3c616fda7b35"></object>
+<hr />
+<input type="button" value="相机测试程序" onclick="fnTest()" /><br />
+<input type="button" value="点击照相" onclick="takePhoto()" /><br />
+<input type="button" value="打开会话" onclick="openSession()" /><br />
+<label>保存路径：</label><input type="text" id="save" name="savePath" value="C:\TEMP" /><br />
+<label>照片名称：</label><input type="text" id="picName" name="picName" value="abc.jpg" /><br />
+<input type="button" value="打开实时预览" onclick="openLiveView()" /><br />
+<input type="button" value="暂停实时预览" onclick="pauseLiveView()" /><br />
+<!--<script type="text/javascript" src="jquery-2.2.2.js"></script>-->
+<script type="text/javascript">
+
+//    $.ready(function () {
+//        var x = $("x");
+//    });
+
+    function $(oid) {
+        return document.getElementById(oid);
+    }
+    var takePhoto = function () {  
+        var x = $("x");
+        var savePath = $("save").value;
+        var picName = $("picName").value;
+        // alert(x.OpenSession());
+        alert(x.TakePhotoButton(savePath, picName));
+//        x.dispose();
+    }
+
+
+    var pauseLiveView = function () {
+        var x = $("x");
+        alert(x.LiveViewPause());
+    }
+
+    /**
+    *
+    */
+    var openLiveView = function () {
+        var x = $("x");
+        // x.OpenSession();
+
+        alert(x.LiveViewButton());
+        
+    }
+
+    var openSession = function () {
+        var x = $("x");
+        alert(x.OpenSession());
+    
+    }
+
+    var fnTest = function () {
+        var x = $("x");
+        alert(x.CloseSession());
+        //        var x = $("x");
+        //        x.Start("这是js中的参数");
+
+        //        alert("GetString测试:" + x.GetString());
+        //        alert("GetDateTime" + x.GetDateTime());
+        //        //var s = x.GetStringArray();
+        //        //alert(s);
+        //        alert("GetStringArray测试：" + x.GetStringArray());
+        //        alert("GetInt测试:" + x.GetInt());
+        //        alert("GetDouble测试:" + x.GetDouble());
+        //        //var g = x.GetGuid();
+        //        //alert(g);
+        //        alert("GetGuid测试:" + x.GetGuid());
+        //        alert("GetList测试:" + x.GetList());
+        //        alert("GetListItems测试：" + x.GetListItems());
+
+        //        var s = x.GetListItems();
+        //        var d = eval(s);
+        //        alert(s);
+        //        alert(d[0].item);
+        //        //var items = eval("(" + x.GetListItems() + ")");
+
+        //        //alert(items);
+
+    }
+
+
+/**
+ *开始照相
+ */
+
+//关闭窗口时释放资源
+    window.onunload = function () {
+        var x = $("x");
+        //x.LiveViewButton()
+    x.dispose();
+}
+</script>
